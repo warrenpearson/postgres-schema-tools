@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SECRETS_ENV=dev
+SECRETS_ENV=$1
 
 source ./secrets.${SECRETS_ENV}
 echo "Using params ${PGUSER} ${PGHOST} ${PGPORT} ${PGDATABASE}"
