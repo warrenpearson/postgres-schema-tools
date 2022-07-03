@@ -7,4 +7,4 @@ TABLE=$1
 source ./secrets.${SECRETS_ENV}
 echo "Using params ${PGUSER} ${PGHOST} ${PGPORT} ${PGDATABASE}"
 
-cat ${TABLE}.sql | psql -U ${PGUSER} -h ${PGHOST} -p ${PGPORT} -c "COPY ${TABLE} FROM STDIN;" ${PGDATBASE}
+cat ./exports/${TABLE}.sql | psql -U ${PGUSER} -h ${PGHOST} -p ${PGPORT} -c "COPY ${TABLE} FROM STDIN;" ${PGDATBASE}
