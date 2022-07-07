@@ -2,7 +2,7 @@
 
 SECRETS_ENV=$1
 TABLE_LIST=$2
-PAGER=on
+PAGER=off
 
 source ./secrets.${SECRETS_ENV}
 echo "Using params ${PGUSER} ${PGHOST} ${PGPORT} ${PGDATABASE}"
@@ -10,7 +10,7 @@ echo "Using params ${PGUSER} ${PGHOST} ${PGPORT} ${PGDATABASE}"
 for TABLE in `more ${TABLE_LIST}`
 do
   echo ${TABLE}
-  psql -P pager=${PAGER} -U ${PGUSER} -h ${PGHOST} -p ${PGPORT} -d ${PGDATABASE} -c "SELECT * FROM ${TABLE} LIMIT 10;"
+  psql -P pager=${PAGER} -U ${PGUSER} -h ${PGHOST} -p ${PGPORT} -d ${PGDATABASE} -c "SELECT * FROM ${TABLE} LIMIT 2;"
   psql -P pager=${PAGER} -U ${PGUSER} -h ${PGHOST} -p ${PGPORT} -d ${PGDATABASE} -c "SELECT COUNT(*) FROM ${TABLE};"
   psql -P pager=${PAGER} -U ${PGUSER} -h ${PGHOST} -p ${PGPORT} -d ${PGDATABASE} -c "SELECT PG_SIZE_PRETTY(PG_RELATION_SIZE('${TABLE}')) AS \"${TABLE}_size\";"
 done
